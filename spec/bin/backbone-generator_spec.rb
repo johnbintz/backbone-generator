@@ -55,12 +55,12 @@ describe 'backbone-generator' do
     it "should generate the collection files" do
       system %{bin/backbone-generator collection Section::Model}
 
-      File.file?(collection = 'public/javascripts/collections/section/models_collection.js').should be_true
-      File.file?(spec = 'spec/javascripts/collections/section/models_collection_spec.js').should be_true
+      File.file?(collection = 'public/javascripts/collections/section/models.js').should be_true
+      File.file?(spec = 'spec/javascripts/collections/section/models_spec.js').should be_true
 
-      File.read(collection).should match(/SectionModelsCollection/)
+      File.read(collection).should match(/SectionModels/)
       File.read(collection).should match(%r{section/model})
-      File.read(spec).should match(/SectionModelsCollection/)
+      File.read(spec).should match(/SectionModels/)
     end
   end
 end

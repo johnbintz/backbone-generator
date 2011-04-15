@@ -1,4 +1,4 @@
-describe('<%= object_name %>sCollection', function() {
+describe('<%= object_name %>s', function() {
   var collection, server;
 
   beforeEach(function() {
@@ -10,7 +10,7 @@ describe('<%= object_name %>sCollection', function() {
   });
 
   it('should fetch records from the API', function() {
-    collection = new <%= object_name %>sCollection();
+    collection = new <%= object_name %>s();
 
     server.respondWith('GET', '<%= underscore_name %>', [ 200, { 'Content-type': 'application/json' }, "[{id: 1}]" ]);
     collection.fetch()
