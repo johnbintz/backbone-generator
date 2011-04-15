@@ -6,8 +6,8 @@ Currently only works with Rails-ish projects and with Jasmine & Jammit. I'm self
 
 `backbone-generate model Admin::User` creates an AdminUserModel object in:
 
-* `public/javascripts/models/admin/user_model.js`
-* `spec/javascripts/models/admin/user_model_spec.js`
+* `public/javascripts/models/admin/user.js`
+* `spec/javascripts/models/admin/user_spec.js`
 
 ### View
 

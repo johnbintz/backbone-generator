@@ -24,8 +24,8 @@ class BackboneGenerator < Thor
   desc 'model Namespaced::Name', "Create a model"
   def model(name)
     @name = name
-    template('model.js.erb', "public/javascripts/models/#{underscore_name}_model.js")
-    template('model_spec.js.erb', "spec/javascripts/models/#{underscore_name}_model_spec.js")
+    template('model.js.erb', "public/javascripts/models/#{underscore_name}.js")
+    template('model_spec.js.erb', "spec/javascripts/models/#{underscore_name}_spec.js")
   end
 
   desc 'view Namespaced::Name', "Create a view"

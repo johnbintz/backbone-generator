@@ -15,8 +15,8 @@ describe 'backbone-generator' do
     it "should generate the model files" do
       system %{bin/backbone-generator model Section::Model}
 
-      File.file?(model = 'public/javascripts/models/section/model_model.js').should be_true
-      File.file?(spec = 'spec/javascripts/models/section/model_model_spec.js').should be_true
+      File.file?(model = 'public/javascripts/models/section/model.js').should be_true
+      File.file?(spec = 'spec/javascripts/models/section/model_spec.js').should be_true
 
       File.read(model).should match(/SectionModel/)
       File.read(spec).should match(/SectionModel/)
