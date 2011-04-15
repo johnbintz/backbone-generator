@@ -1,4 +1,4 @@
-describe('<%= object_name %>Collection', function() {
+describe('<%= object_name %>sCollection', function() {
   var collection, server;
 
   beforeEach(function() {
@@ -10,7 +10,7 @@ describe('<%= object_name %>Collection', function() {
   });
 
   it('should fetch records from the API', function() {
-    collection = new <%= object_name %>Collection();
+    collection = new <%= object_name %>sCollection();
 
     server.respondWith('GET', '<%= underscore_name %>', [ 200, { 'Content-type': 'application/json' }, "[{id: 1}]" ]);
     collection.fetch()
@@ -18,4 +18,4 @@ describe('<%= object_name %>Collection', function() {
 
     expect(collection.length).toEqual(1);
   });
-});
+}s);

@@ -39,8 +39,8 @@ class BackboneGenerator < Thor
   desc 'collection Namespaced::Name', "Create a collection"
   def collection(name)
     @name = name
-    template('collection.js.erb', "public/javascripts/collections/#{underscore_name}.js")
-    template('collection_spec.js.erb', "spec/javascripts/collections/#{underscore_name}_spec.js")
+    template('collection.js.erb', "public/javascripts/collections/#{underscore_name}s.js")
+    template('collection_spec.js.erb', "spec/javascripts/collections/#{underscore_name}s_spec.js")
   end
 end
 
