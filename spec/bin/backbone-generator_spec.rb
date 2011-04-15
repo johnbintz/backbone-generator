@@ -25,28 +25,42 @@ describe 'backbone-generator' do
 
   describe 'view' do
     it "should generate the view files" do
-      system %{bin/backbone-generator view Section::View}
+      system %{bin/backbone-generator view Section::Model}
 
-      File.file?(view = 'public/javascripts/views/section/view.js').should be_true
-      File.file?(spec = 'spec/javascripts/views/section/view_spec.js').should be_true
-      File.file?(template = 'app/views/section/view.jst').should be_true
+      File.file?(view = 'public/javascripts/views/section/model.js').should be_true
+      File.file?(spec = 'spec/javascripts/views/section/model_spec.js').should be_true
+      File.file?(template = 'app/views/section/model.jst').should be_true
 
-      File.read(view).should match(/SectionView/)
-      File.read(view).should match(%r{template: JST\['section/view'\]})
-      File.read(spec).should match(/SectionView/)
+      File.read(view).should match(/SectionModel/)
+      File.read(view).should match(%r{template: JST\['section/model'\]})
+      File.read(spec).should match(/SectionModel/)
+    end
+  end
+
+  describe 'collection view' do
+    it "should generate the collection view files" do
+      system %{bin/backbone-generator collection-view Section::Model}
+
+      File.file?(view = 'public/javascripts/views/section/models.js').should be_true
+      File.file?(spec = 'spec/javascripts/views/section/models_spec.js').should be_true
+      File.file?(template = 'app/views/section/models.jst').should be_true
+
+      File.read(view).should match(/SectionModels/)
+      File.read(view).should match(%r{template: JST\['section/models'\]})
+      File.read(spec).should match(/SectionModels/)
     end
   end
 
   describe 'collection' do
     it "should generate the collection files" do
-      system %{bin/backbone-generator collection Section::Collection}
+      system %{bin/backbone-generator collection Section::Model}
 
-      File.file?(collection = 'public/javascripts/collections/section/collections.js').should be_true
-      File.file?(spec = 'spec/javascripts/collections/section/collections_spec.js').should be_true
+      File.file?(collection = 'public/javascripts/collections/section/models.js').should be_true
+      File.file?(spec = 'spec/javascripts/collections/section/models_spec.js').should be_true
 
-      File.read(collection).should match(/SectionCollectionsCollection/)
-      File.read(collection).should match(%r{section/collection})
-      File.read(spec).should match(/SectionCollectionsCollection/)
+      File.read(collection).should match(/SectionModelsCollection/)
+      File.read(collection).should match(%r{section/model})
+      File.read(spec).should match(/SectionModelsCollection/)
     end
   end
 end

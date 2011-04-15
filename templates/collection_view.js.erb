@@ -1,0 +1,22 @@
+var <%= object_name %>sView = Backbone.View.extend({
+  template: JST['<%= underscore_name %>s'],
+  initialize: function(collection) {
+    _.bindAll(this, 'render', 'addOne', 'addAll');
+
+    this.collection = collection;
+    this.collection.bind('refresh', this.addAll);
+
+    this.render();
+    this.collection.fetch()
+  },
+  render: function() {
+    $(this.el).html(this.template());
+  },
+  addOne: function(model) {
+    var view = new <%= object_name %>({model: model});
+    this.$('.list').append(view.render().el);
+  },
+  addAll: function() {
+    this.collection.each(this.addOne);
+  }
+});

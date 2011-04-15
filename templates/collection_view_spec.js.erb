@@ -1,0 +1,14 @@
+describe('<%= object_name %>sView', function() {
+  var view, collection;
+
+  beforeEach(function() {
+    collection = new <%= object_name %>s();
+  });
+
+  it('should render', function() {
+    view = new <%= object_name %>sView(collection);
+    view.render();
+
+    expect($(view.el)).toContain('.list');
+  });
+});
