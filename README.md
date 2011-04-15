@@ -24,5 +24,13 @@ Currently only works with Rails-ish projects and with Jasmine & Jammit. I'm self
 * `public/javascripts/collections/admin/users.js`
 * `spec/javascripts/collections/admin/users_spec.js`
 
+### Collection View
+
+`backbone-generate collection-view Admin::User` creates an AdminUsersView object in:
+
+* `public/javascripts/views/admin/users.js`
+* `spec/javascripts/views/admin/users_spec.js`
+* `app/views/admin/users.jst`
+
 Please add more and make it more friendly with things that are not Rails, Jasmine, and Jammit!
 

@@ -45,9 +45,9 @@ describe 'backbone-generator' do
       File.file?(spec = 'spec/javascripts/views/section/models_spec.js').should be_true
       File.file?(template = 'app/views/section/models.jst').should be_true
 
-      File.read(view).should match(/SectionModels/)
+      File.read(view).should match(/SectionModelsView/)
       File.read(view).should match(%r{template: JST\['section/models'\]})
-      File.read(spec).should match(/SectionModels/)
+      File.read(spec).should match(/SectionModelsView/)
     end
   end
 
