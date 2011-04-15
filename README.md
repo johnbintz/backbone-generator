@@ -21,8 +21,8 @@ Currently only works with Rails-ish projects and with Jasmine & Jammit. I'm self
 
 `backbone-generate collection Admin::User` creates an AdminUsersCollection object in:
 
-* `public/javascripts/collections/admin/users_collection.js`
-* `spec/javascripts/collections/admin/users_collection_spec.js`
+* `public/javascripts/collections/admin/users.js`
+* `spec/javascripts/collections/admin/users_spec.js`
 
 ### Collection View
 
