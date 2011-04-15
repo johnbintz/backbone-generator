@@ -1,0 +1,10 @@
+describe('<%= object_name %>View', function() {
+  var view;
+
+  it('should render', function() {
+    view = new <%= object_name %>View();
+    view.render();
+
+    expect($(view.el)).toContain('.something');
+  });
+});

@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'thor'
+require 'thor/group'
+
+class BackboneGenerator < Thor
+  include Thor::Actions
+
+  def self.source_root
+    File.expand_path('../../templates', __FILE__)
+  end
+
+  no_tasks do
+    def underscore_name
+      Thor::Util.snake_case(@name.gsub("::", "/"))
+    end
+
+    def object_name
+      @name.gsub('::', '')
+    end
+  end
+
+  desc 'model Namespaced::Name', "Create a model"
+  def model(name)
+    @name = name
+    template('model.js.erb', "public/javascripts/models/#{underscore_name}.js")
+    template('model_spec.js.erb', "spec/javascripts/models/#{underscore_name}_spec.js")
+  end
+
+  desc 'view Namespaced::Name', "Create a view"
+  def view(name)
+    @name = name
+    template('view.js.erb', "public/javascripts/views/#{underscore_name}.js")
+    template('view.jst.erb', "app/views/#{underscore_name}.jst")
+    template('view_spec.js.erb', "spec/javascripts/views/#{underscore_name}_spec.js")
+  end
+
+  desc 'collection Namespaced::Name', "Create a collection"
+  def collection(name)
+    @name = name
+    template('collection.js.erb', "public/javascripts/collections/#{underscore_name}.js")
+    template('collection_spec.js.erb', "spec/javascripts/collections/#{underscore_name}_spec.js")
+  end
+end
+
+BackboneGenerator.start

@@ -1,0 +1,10 @@
+var <%= object_name %>View = Backbone.View.extend({
+  template: JST['<%= underscore_name %>'],
+  initialize: function() {
+    _.bindAll(this, 'render');
+  },
+  render: function() {
+    $(this.el).html(this.template());
+  }
+});
+

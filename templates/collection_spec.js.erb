@@ -1,0 +1,21 @@
+describe('<%= object_name %>Collection', function() {
+  var collection, server;
+
+  beforeEach(function() {
+    server = sinon.fakeServer().create();
+  });
+
+  afterEach(function() {
+    server.restore();
+  });
+
+  it('should fetch records from the API', function() {
+    collection = new <%= object_name %>Collection();
+
+    server.respondWith('GET', '<%= underscore_name %>', [ 200, { 'Content-type': 'application/json' }, "[{id: 1}]" ]);
+    collection.fetch()
+    server.respond();
+
+    expect(collection.length).toEqual(1);
+  });
+});
