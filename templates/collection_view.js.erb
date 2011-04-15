@@ -13,7 +13,7 @@ var <%= object_name %>sView = Backbone.View.extend({
     $(this.el).html(this.template());
   },
   addOne: function(model) {
-    var view = new <%= object_name %>({model: model});
+    var view = new <%= object_name %>View({model: model});
     this.$('.list').append(view.render().el);
   },
   addAll: function() {
