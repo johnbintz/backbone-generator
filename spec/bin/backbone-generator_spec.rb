@@ -32,6 +32,7 @@ describe 'backbone-generator' do
       File.file?(template = 'app/views/section/model.jst').should be_true
 
       File.read(view).should match(/SectionModel/)
+      File.read(view).should match(/return this/)
       File.read(view).should match(%r{template: JST\['section/model'\]})
       File.read(spec).should match(/SectionModel/)
     end
@@ -47,6 +48,7 @@ describe 'backbone-generator' do
 
       File.read(view).should match(/SectionModelsView/)
       File.read(view).should match(/SectionModelView/)
+      File.read(view).should match(/return this/)
       File.read(view).should match(%r{template: JST\['section/models'\]})
       File.read(spec).should match(/SectionModelsView/)
     end

@@ -5,6 +5,7 @@ var <%= object_name %>View = Backbone.View.extend({
   },
   render: function() {
     $(this.el).html(this.template());
+    return this;
   }
 });
 

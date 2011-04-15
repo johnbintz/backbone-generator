@@ -11,6 +11,7 @@ var <%= object_name %>sView = Backbone.View.extend({
   },
   render: function() {
     $(this.el).html(this.template());
+    return this;
   },
   addOne: function(model) {
     var view = new <%= object_name %>View({model: model});
