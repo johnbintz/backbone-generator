@@ -24,31 +24,31 @@ class BackboneGenerator < Thor
   desc 'model Namespaced::Name', "Create a model"
   def model(name)
     @name = name
-    template('model.js.erb', "public/javascripts/models/#{underscore_name}.js")
-    template('model_spec.js.erb', "spec/javascripts/models/#{underscore_name}_spec.js")
+    template('model.js.erb', "public/javascripts/models/#{underscore_name}_model.js")
+    template('model_spec.js.erb', "spec/javascripts/models/#{underscore_name}_model_spec.js")
   end
 
   desc 'view Namespaced::Name', "Create a view"
   def view(name)
     @name = name
-    template('view.js.erb', "public/javascripts/views/#{underscore_name}.js")
+    template('view.js.erb', "public/javascripts/views/#{underscore_name}_view.js")
     template('view.jst.erb', "app/views/#{underscore_name}.jst")
-    template('view_spec.js.erb', "spec/javascripts/views/#{underscore_name}_spec.js")
+    template('view_spec.js.erb', "spec/javascripts/views/#{underscore_name}_view_spec.js")
   end
 
   desc 'collection Namespaced::Name', "Create a collection"
   def collection(name)
     @name = name
-    template('collection.js.erb', "public/javascripts/collections/#{underscore_name}s.js")
-    template('collection_spec.js.erb', "spec/javascripts/collections/#{underscore_name}s_spec.js")
+    template('collection.js.erb', "public/javascripts/collections/#{underscore_name}s_collection.js")
+    template('collection_spec.js.erb', "spec/javascripts/collections/#{underscore_name}s_collection_spec.js")
   end
 
   desc 'collection-view Namespaced::Name', "Create a collection view"
   def collection_view(name)
     @name = name
-    template('collection_view.js.erb', "public/javascripts/views/#{underscore_name}s.js")
+    template('collection_view.js.erb', "public/javascripts/views/#{underscore_name}s_view.js")
     template('collection_view.jst.erb', "app/views/#{underscore_name}s.jst")
-    template('collection_view_spec.js.erb', "spec/javascripts/views/#{underscore_name}s_spec.js")
+    template('collection_view_spec.js.erb', "spec/javascripts/views/#{underscore_name}s_view_spec.js")
   end
 end
 
