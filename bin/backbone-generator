@@ -27,7 +27,7 @@ class BackboneGenerator < Thor
 
     def generate_view
       template('view.js.erb', "public/javascripts/views/#{underscore_name}_view.js")
-      template('view.jst.erb', "app/views/#{underscore_name}.jst")
+      template('view.jst.erb', "app/views/#{underscore_name}s/view.jst")
       template('view_spec.js.erb', "spec/javascripts/views/#{underscore_name}_view_spec.js")
     end
 
@@ -38,7 +38,7 @@ class BackboneGenerator < Thor
 
     def generate_collection_view
       template('collection_view.js.erb', "public/javascripts/views/#{underscore_name}s_view.js")
-      template('collection_view.jst.erb', "app/views/#{underscore_name}s.jst")
+      template('collection_view.jst.erb', "app/views/#{underscore_name}s/list.jst")
       template('collection_view_spec.js.erb', "spec/javascripts/views/#{underscore_name}s_view_spec.js")
     end
   end

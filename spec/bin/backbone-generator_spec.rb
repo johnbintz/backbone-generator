@@ -22,11 +22,11 @@ describe 'backbone-generator' do
   def should_generate_view
     File.file?(view = 'public/javascripts/views/section/model_view.js').should be_true
     File.file?(spec = 'spec/javascripts/views/section/model_view_spec.js').should be_true
-    File.file?(template = 'app/views/section/model.jst').should be_true
+    File.file?(template = 'app/views/section/models/view.jst').should be_true
 
     File.read(view).should match(/SectionModel/)
     File.read(view).should match(/return this/)
-    File.read(view).should match(%r{template: JST\['section/model'\]})
+    File.read(view).should match(%r{template: JST\['section/models/view'\]})
     File.read(spec).should match(/SectionModel/)
   end
 
@@ -42,12 +42,12 @@ describe 'backbone-generator' do
   def should_generate_collection_view
     File.file?(view = 'public/javascripts/views/section/models_view.js').should be_true
     File.file?(spec = 'spec/javascripts/views/section/models_view_spec.js').should be_true
-    File.file?(template = 'app/views/section/models.jst').should be_true
+    File.file?(template = 'app/views/section/models/list.jst').should be_true
 
     File.read(view).should match(/SectionModelsView/)
     File.read(view).should match(/SectionModelView/)
     File.read(view).should match(/return this/)
-    File.read(view).should match(%r{template: JST\['section/models'\]})
+    File.read(view).should match(%r{template: JST\['section/models/list'\]})
     File.read(spec).should match(/SectionModelsView/)
   end
 
