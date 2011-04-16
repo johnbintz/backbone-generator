@@ -11,15 +11,51 @@ describe 'backbone-generator' do
   before { clean! }
   after { clean! }
 
+  def should_generate_model
+    File.file?(model = 'public/javascripts/models/section/model.js').should be_true
+    File.file?(spec = 'spec/javascripts/models/section/model_spec.js').should be_true
+
+    File.read(model).should match(/SectionModel/)
+    File.read(spec).should match(/SectionModel/)
+  end
+
+  def should_generate_view
+    File.file?(view = 'public/javascripts/views/section/model_view.js').should be_true
+    File.file?(spec = 'spec/javascripts/views/section/model_view_spec.js').should be_true
+    File.file?(template = 'app/views/section/model.jst').should be_true
+
+    File.read(view).should match(/SectionModel/)
+    File.read(view).should match(/return this/)
+    File.read(view).should match(%r{template: JST\['section/model'\]})
+    File.read(spec).should match(/SectionModel/)
+  end
+
+  def should_generate_collection
+    File.file?(collection = 'public/javascripts/collections/section/models.js').should be_true
+    File.file?(spec = 'spec/javascripts/collections/section/models_spec.js').should be_true
+
+    File.read(collection).should match(/SectionModels/)
+    File.read(collection).should match(%r{section/model})
+    File.read(spec).should match(/SectionModels/)
+  end
+
+  def should_generate_collection_view
+    File.file?(view = 'public/javascripts/views/section/models_view.js').should be_true
+    File.file?(spec = 'spec/javascripts/views/section/models_view_spec.js').should be_true
+    File.file?(template = 'app/views/section/models.jst').should be_true
+
+    File.read(view).should match(/SectionModelsView/)
+    File.read(view).should match(/SectionModelView/)
+    File.read(view).should match(/return this/)
+    File.read(view).should match(%r{template: JST\['section/models'\]})
+    File.read(spec).should match(/SectionModelsView/)
+  end
+
   describe 'model' do
     it "should generate the model files" do
       system %{bin/backbone-generator model Section::Model}
 
-      File.file?(model = 'public/javascripts/models/section/model.js').should be_true
-      File.file?(spec = 'spec/javascripts/models/section/model_spec.js').should be_true
-
-      File.read(model).should match(/SectionModel/)
-      File.read(spec).should match(/SectionModel/)
+      should_generate_model
     end
   end
 
@@ -27,14 +63,7 @@ describe 'backbone-generator' do
     it "should generate the view files" do
       system %{bin/backbone-generator view Section::Model}
 
-      File.file?(view = 'public/javascripts/views/section/model_view.js').should be_true
-      File.file?(spec = 'spec/javascripts/views/section/model_view_spec.js').should be_true
-      File.file?(template = 'app/views/section/model.jst').should be_true
-
-      File.read(view).should match(/SectionModel/)
-      File.read(view).should match(/return this/)
-      File.read(view).should match(%r{template: JST\['section/model'\]})
-      File.read(spec).should match(/SectionModel/)
+      should_generate_view
     end
   end
 
@@ -42,15 +71,7 @@ describe 'backbone-generator' do
     it "should generate the collection view files" do
       system %{bin/backbone-generator collection-view Section::Model}
 
-      File.file?(view = 'public/javascripts/views/section/models_view.js').should be_true
-      File.file?(spec = 'spec/javascripts/views/section/models_view_spec.js').should be_true
-      File.file?(template = 'app/views/section/models.jst').should be_true
-
-      File.read(view).should match(/SectionModelsView/)
-      File.read(view).should match(/SectionModelView/)
-      File.read(view).should match(/return this/)
-      File.read(view).should match(%r{template: JST\['section/models'\]})
-      File.read(spec).should match(/SectionModelsView/)
+      should_generate_collection_view
     end
   end
 
@@ -58,12 +79,18 @@ describe 'backbone-generator' do
     it "should generate the collection files" do
       system %{bin/backbone-generator collection Section::Model}
 
-      File.file?(collection = 'public/javascripts/collections/section/models.js').should be_true
-      File.file?(spec = 'spec/javascripts/collections/section/models_spec.js').should be_true
+      should_generate_collection
+    end
+  end
 
-      File.read(collection).should match(/SectionModels/)
-      File.read(collection).should match(%r{section/model})
-      File.read(spec).should match(/SectionModels/)
+  describe 'scaffold' do
+    it "should generate everything!" do
+      system %{bin/backbone-generator scaffold Section::Model}
+
+      should_generate_model
+      should_generate_view
+      should_generate_collection
+      should_generate_collection_view
     end
   end
 end

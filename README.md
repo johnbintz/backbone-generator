@@ -32,5 +32,5 @@ Currently only works with Rails-ish projects and with Jasmine & Jammit. I'm self
 * `spec/javascripts/views/admin/users_view_spec.js`
 * `app/views/admin/users.jst`
 
-Please add more and make it more friendly with things that are not Rails, Jasmine, and Jammit!
+Generate everything with `backbone-generate scaffold Admin::User`.
 
