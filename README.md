@@ -15,7 +15,7 @@ Currently only works with Rails-ish projects and with Jasmine & Jammit. I'm self
 
 * `public/javascripts/views/admin/user_view.js`
 * `spec/javascripts/views/admin/user_view_spec.js`
-* `app/views/admin/user.jst`
+* `app/views/admin/users/view.jst`
 
 ### Collection
 
@@ -30,7 +30,7 @@ Currently only works with Rails-ish projects and with Jasmine & Jammit. I'm self
 
 * `public/javascripts/views/admin/users_view.js`
 * `spec/javascripts/views/admin/users_view_spec.js`
-* `app/views/admin/users.jst`
+* `app/views/admin/users/list.jst`
 
 Generate everything with `backbone-generate scaffold Admin::User`.
 
