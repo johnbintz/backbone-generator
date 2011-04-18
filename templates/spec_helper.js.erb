@@ -1,13 +1,13 @@
 /* Backbone helpers. Requires json2 and sinon-server or the full-blown sinon. */
 
 var withServer = function() {
-  jasmine.getEnv().currentSpec.withServer();
+  jasmine.getEnv().withServer();
 };
 if (isCommonJS) exports.withServer = withServer;
 
 jasmine.Env.prototype.withServer = function() {
   this.currentSuite.beforeEach(function() {
-    this.server = sinon.fakeServer().create();
+    this.server = sinon.fakeServer.create();
   });
 
   this.currentSuite.afterEach(function() {
