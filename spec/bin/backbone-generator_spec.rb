@@ -93,4 +93,12 @@ describe 'backbone-generator' do
       should_generate_collection_view
     end
   end
+
+  describe 'spec helper' do
+    it "should generate a spec helper" do
+      system %{bin/backbone-generator spec-helper}
+
+      File.file?(collection = 'spec/javascripts/helpers/backbone_spec_helper.js').should be_true
+    end
+  end
 end

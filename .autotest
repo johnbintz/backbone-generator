@@ -1,0 +1,5 @@
+Autotest.add_hook(:initialize) do |at|
+  at.add_mapping(%r{bin/(.*)}, true) do |filename, matches|
+    at.files_matching(%r{spec/bin/#{matches[1]}_spec\.rb})
+  end
+end

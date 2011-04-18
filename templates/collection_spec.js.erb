@@ -1,21 +1,16 @@
 describe('<%= object_name %>s', function() {
-  var collection, server;
+  var collection;
 
-  beforeEach(function() {
-    server = sinon.fakeServer().create();
-  });
-
-  afterEach(function() {
-    server.restore();
-  });
+  withServer();
 
   it('should fetch records from the API', function() {
     collection = new <%= object_name %>s();
 
-    server.respondWith('GET', '<%= underscore_name %>', [ 200, { 'Content-type': 'application/json' }, "[{id: 1}]" ]);
+    this.server.respondWith('GET', '<%= underscore_name %>', this.validJSONResponse([{id: 1}]));
     collection.fetch()
-    server.respond();
+    this.server.respond();
 
     expect(collection.length).toEqual(1);
   });
-}s);
+});
+

@@ -1,0 +1,22 @@
+/* Backbone helpers. Requires json2 and sinon-server or the full-blown sinon. */
+
+var withServer = function() {
+  jasmine.getEnv().currentSpec.withServer();
+};
+if (isCommonJS) exports.withServer = withServer;
+
+jasmine.Env.prototype.withServer = function() {
+  this.currentSuite.beforeEach(function() {
+    this.server = sinon.fakeServer().create();
+  });
+
+  this.currentSuite.afterEach(function() {
+    this.server.restore();
+  });
+};
+
+beforeEach(function() {
+  this.validJSONResponse = function(data) {
+    return [ 200, { 'Content-type': 'application/json' }, JSON.stringify(data) ];
+  };
+});

@@ -72,6 +72,11 @@ class BackboneGenerator < Thor
     @name = name
     %w{model view collection collection_view}.each { |which| send("generate_#{which}") }
   end
+
+  desc 'spec-helper', "Generate a spec helper for Backbone things"
+  def spec_helper
+    template('spec_helper.js.erb', 'spec/javascripts/helpers/backbone_spec_helper.js')
+  end
 end
 
 BackboneGenerator.start
