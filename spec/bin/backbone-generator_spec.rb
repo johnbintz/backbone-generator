@@ -35,8 +35,10 @@ describe 'backbone-generator' do
     File.file?(spec = 'spec/javascripts/collections/section/models_spec.js').should be_true
 
     File.read(collection).should match(/SectionModels/)
+    File.read(collection).should_not match(/SectionModelss/)
     File.read(collection).should match(%r{section/model})
     File.read(spec).should match(/SectionModels/)
+    File.read(spec).should_not match(/SectionModelss/)
   end
 
   def should_generate_collection_view
@@ -45,10 +47,12 @@ describe 'backbone-generator' do
     File.file?(template = 'app/views/section/models/list.jst').should be_true
 
     File.read(view).should match(/SectionModelsView/)
+    File.read(view).should_not match(/SectionModelssView/)
     File.read(view).should match(/SectionModelView/)
     File.read(view).should match(/return this/)
     File.read(view).should match(%r{template: JST\['section/models/list'\]})
     File.read(spec).should match(/SectionModelsView/)
+    File.read(spec).should_not match(/SectionModelssView/)
   end
 
   describe 'model' do
@@ -68,18 +72,38 @@ describe 'backbone-generator' do
   end
 
   describe 'collection view' do
-    it "should generate the collection view files" do
-      system %{bin/backbone-generator collection-view Section::Model}
+    context 'without trailing s' do
+      it "should generate the collection view files" do
+        system %{bin/backbone-generator collection-view Section::Model}
 
-      should_generate_collection_view
+        should_generate_collection_view
+      end
+    end
+
+    context 'with trailing s' do
+      it "should generate the collection view files" do
+        system %{bin/backbone-generator collection-view Section::Models}
+
+        should_generate_collection_view
+      end
     end
   end
 
   describe 'collection' do
-    it "should generate the collection files" do
-      system %{bin/backbone-generator collection Section::Model}
+    context 'without trailing s' do
+      it "should generate the collection files" do
+        system %{bin/backbone-generator collection Section::Model}
 
-      should_generate_collection
+        should_generate_collection
+      end
+    end
+
+    context 'with trailing s' do
+      it "should generate the collection files" do
+        system %{bin/backbone-generator collection Section::Models}
+
+        should_generate_collection
+      end
     end
   end
 

@@ -13,11 +13,19 @@ class BackboneGenerator < Thor
 
   no_tasks do
     def underscore_name
-      Thor::Util.snake_case(@name.gsub("::", "/"))
+      singularize(Thor::Util.snake_case(@name.gsub("::", "/")))
+    end
+
+    def plural_underscore_name
+      pluralize(underscore_name)
     end
 
     def object_name
-      @name.gsub('::', '')
+      singularize(@name.gsub('::', ''))
+    end
+
+    def plural_object_name
+      pluralize(object_name)
     end
 
     def generate_model
@@ -32,14 +40,14 @@ class BackboneGenerator < Thor
     end
 
     def generate_collection
-      template('collection.js.erb', "public/javascripts/collections/#{underscore_name}s.js")
-      template('collection_spec.js.erb', "spec/javascripts/collections/#{underscore_name}s_spec.js")
+      template('collection.js.erb', "public/javascripts/collections/#{plural_underscore_name}.js")
+      template('collection_spec.js.erb', "spec/javascripts/collections/#{plural_underscore_name}_spec.js")
     end
 
     def generate_collection_view
-      template('collection_view.js.erb', "public/javascripts/views/#{underscore_name}s_view.js")
-      template('collection_view.jst.erb', "app/views/#{underscore_name}s/list.jst")
-      template('collection_view_spec.js.erb', "spec/javascripts/views/#{underscore_name}s_view_spec.js")
+      template('collection_view.js.erb', "public/javascripts/views/#{plural_underscore_name}_view.js")
+      template('collection_view.jst.erb', "app/views/#{plural_underscore_name}/list.jst")
+      template('collection_view_spec.js.erb', "spec/javascripts/views/#{plural_underscore_name}_view_spec.js")
     end
   end
 
@@ -76,6 +84,15 @@ class BackboneGenerator < Thor
   desc 'spec-helper', "Generate a spec helper for Backbone things"
   def spec_helper
     template('spec_helper.js.erb', 'spec/javascripts/helpers/backbone_spec_helper.js')
+  end
+
+  private
+  def pluralize(string)
+    singularize(string) + 's'
+  end
+
+  def singularize(string)
+    string.gsub(%r{s$}, '')
   end
 end
 

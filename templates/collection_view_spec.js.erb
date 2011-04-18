@@ -1,12 +1,12 @@
-describe('<%= object_name %>sView', function() {
+describe('<%= plural_object_name %>View', function() {
   var view, collection;
 
   beforeEach(function() {
-    collection = new <%= object_name %>s();
+    collection = new <%= plural_object_name %>();
   });
 
   it('should render', function() {
-    view = new <%= object_name %>sView(collection);
+    view = new <%= plural_object_name %>View(collection);
     view.render();
 
     expect($(view.el)).toContain('.list');

@@ -1,12 +1,12 @@
-describe('<%= object_name %>s', function() {
+describe('<%= plural_object_name %>', function() {
   var collection;
 
   withServer();
 
   it('should fetch records from the API', function() {
-    collection = new <%= object_name %>s();
+    collection = new <%= plural_object_name %>();
 
-    this.server.respondWith('GET', '<%= underscore_name %>', this.validJSONResponse([{id: 1}]));
+    this.server.respondWith('GET', '<%= plural_underscore_name %>', this.validJSONResponse([{id: 1}]));
     collection.fetch()
     this.server.respond();
 

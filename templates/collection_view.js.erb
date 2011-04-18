@@ -1,5 +1,5 @@
-var <%= object_name %>sView = Backbone.View.extend({
-  template: JST['<%= underscore_name %>s/list'],
+var <%= plural_object_name %>View = Backbone.View.extend({
+  template: JST['<%= plural_underscore_name %>/list'],
   initialize: function(collection) {
     _.bindAll(this, 'render', 'addOne', 'addAll');
 
