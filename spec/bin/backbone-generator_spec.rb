@@ -133,4 +133,15 @@ describe 'backbone-generator' do
       File.file?(collection = 'public/javascripts/applications/backbone_helper.js').should be_true
     end
   end
+
+  describe 'application scaffold' do
+    it "should generate an application scaffold" do
+      system %{bin/backbone-generator app-scaffold}
+
+      File.file?(app = 'public/javascripts/application/app_view.js').should be_true
+      File.file?(app_view = 'app/views/application/app_view.jst').should be_true
+      File.file?(controller = 'public/javascripts/application/controller.js').should be_true
+      File.file?(spec = 'spec/javascripts/application/app_view_spec.js').should be_true
+    end
+  end
 end

@@ -1,0 +1,12 @@
+describe('AppView', function() {
+  var app_view;
+
+  beforeEach(function() {
+    app_view = new AppView();
+  });
+
+  it('should render', function() {
+    expect($(app_view.render().el)).toContain('.something');
+  });
+});
+

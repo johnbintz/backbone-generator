@@ -91,6 +91,14 @@ class BackboneGenerator < Thor
     template('app_helper.js.erb', 'public/javascripts/applications/backbone_helper.js')
   end
 
+  desc 'app-scaffold', "Generate an application scaffold"
+  def app_scaffold
+    template('app_view.js.erb', 'public/javascripts/application/app_view.js')
+    template('app_view.jst.erb', 'app/views/application/app_view.jst')
+    template('controller.js.erb', 'public/javascripts/application/controller.js')
+    template('app_view_spec.js.erb', 'spec/javascripts/application/app_view_spec.js')
+  end
+
   private
   def pluralize(string)
     singularize(string) + 's'
