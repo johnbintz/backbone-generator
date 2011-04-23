@@ -1,0 +1,19 @@
+/* Ensure a Collection is fetched and has entries before running a block of code. */
+
+_.extend(Backbone.Collection.prototype, {
+  ensureFetched: function(callback) {
+    if (this.length == 0 || this._alreadyEnsureFetched) {
+      var _this = this;
+      var _refresher = function() {
+        _this.unbind('refresh', _refresher);
+        callback.apply(_this);
+        _this._alreadyEnsureFetched = true;
+      };
+      this.bind('refresh', _refresher);
+      this.fetch();
+    } else {
+      callback.apply(this);
+    }
+  }
+});
+

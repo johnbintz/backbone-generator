@@ -86,6 +86,11 @@ class BackboneGenerator < Thor
     template('spec_helper.js.erb', 'spec/javascripts/helpers/backbone_spec_helper.js')
   end
 
+  desc 'app-helper', "Generate an application helper for useful Backbone things"
+  def app_helper
+    template('app_helper.js.erb', 'public/javascripts/applications/backbone_helper.js')
+  end
+
   private
   def pluralize(string)
     singularize(string) + 's'

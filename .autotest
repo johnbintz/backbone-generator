@@ -2,4 +2,12 @@ Autotest.add_hook(:initialize) do |at|
   at.add_mapping(%r{bin/(.*)}, true) do |filename, matches|
     at.files_matching(%r{spec/bin/#{matches[1]}_spec\.rb})
   end
+
+  at.add_mapping(%r{spec/(.*)}, true) do |filename, matches|
+    at.files_matching(%r{#{filename}})
+  end
+
+  at.add_mapping(%r{templates/.*}, true) do |filename, matches|
+    at.files_matching(%r{spec/bin/.*_spec\.rb})
+  end
 end
