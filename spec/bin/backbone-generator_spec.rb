@@ -125,4 +125,12 @@ describe 'backbone-generator' do
       File.file?(collection = 'spec/javascripts/helpers/backbone_spec_helper.js').should be_true
     end
   end
+
+  describe 'app helper' do
+    it "should generate an app helper" do
+      system %{bin/backbone-generator app-helper}
+
+      File.file?(collection = 'public/javascripts/applications/backbone_helper.js').should be_true
+    end
+  end
 end
