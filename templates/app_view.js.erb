@@ -1,0 +1,16 @@
+var AppView = Backbone.View.extend({
+  el: '#application',
+  template: JST['application/app_view'],
+  initialize: function() {
+    _.bindAll(this, 'render');
+
+    var controller = new Controller({app: this});
+
+    Backbone.history.start();
+  },
+  render: function() {
+    $(this.el).html(this.template());
+    return this;
+  },
+});
+
