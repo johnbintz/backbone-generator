@@ -4,7 +4,8 @@ var <%= object_name %>View = Backbone.View.extend({
     _.bindAll(this, 'render');
   },
   render: function() {
-    $(this.el).html(this.template());
+    $(this.el).html(this.template(this.model.toJSON()));
+    this.$('button').text(this.model.isNew() ? 'Create' : 'Update');
     return this;
   }
 });

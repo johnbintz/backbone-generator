@@ -1,10 +1,29 @@
 describe('<%= object_name %>View', function() {
-  var view;
+  var view, model;
 
-  it('should render', function() {
-    view = new <%= object_name %>View();
-    view.render();
+  describe('new record', function() {
+    beforeEach(function() {
+      model = new <%= object_name %>();
+    });
 
-    expect($(view.el)).toContain('.something');
+    it('should render with a create button', function() {
+      view = new <%= object_name %>View({model: model});
+      view.render();
+
+      expect(view.$('button')).toHaveText('Create');
+    });
+  });
+
+  describe('existing record', function() {
+    beforeEach(function() {
+      model = new <%= object_name %>({id: 1});
+    });
+
+    it('should render with an update button', function() {
+      view = new <%= object_name %>View({model: model});
+      view.render();
+
+      expect(view.$('button')).toHaveText('Update');
+    });
   });
 });
