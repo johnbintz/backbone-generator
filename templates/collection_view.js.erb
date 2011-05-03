@@ -4,7 +4,7 @@ var <%= plural_object_name %>View = Backbone.View.extend({
   },
   template: JST['<%= plural_underscore_name %>/list'],
   initialize: function() {
-    _.bindAll(this, 'render', 'addOne', 'addAll', 'new');
+    _.bindAll(this, 'render', 'addOne', 'addAll', 'addNew');
 
     this.collection.bind('refresh', this.addAll);
 
@@ -23,6 +23,9 @@ var <%= plural_object_name %>View = Backbone.View.extend({
     this.collection.each(this.addOne);
   },
   addNew: function() {
+    var facility = new <%= object_name %>();
+    this.collection.add(facility);
 
+    this.addOne(facility);
   }
 });

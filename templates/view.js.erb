@@ -1,11 +1,13 @@
 var <%= object_name %>View = Backbone.View.extend({
   events: {
-    'click button.save': 'save'
+    'click button.save': 'save',
+    'click button.destroy': 'destroy'
   },
   attributeFields: [],
   template: JST['<%= underscore_name %>s/view'],
+  className: '<%= underscore_name %>',
   initialize: function() {
-    _.bindAll(this, 'render', 'save');
+    _.bindAll(this, 'render', 'save', 'destroy');
 
     this.model.bind('change', this.render);
   },
@@ -16,6 +18,11 @@ var <%= object_name %>View = Backbone.View.extend({
   },
   save: function() {
     this.model.save(this.attributes());
+  },
+  destroy: function() {
+    if (confirm("Are you sure?")) {
+      this.model.destroy();
+    }
   }
 });
 

@@ -17,6 +17,7 @@ describe('<%= object_name %>View', function() {
   describe('existing record', function() {
     beforeEach(function() {
       model = new <%= object_name %>({id: 1});
+      setFixtures('<div id="container" />');
     });
 
     it('should render with an update button', function() {
@@ -24,6 +25,25 @@ describe('<%= object_name %>View', function() {
       view.render();
 
       expect(view.$('button.save')).toHaveText('Update');
+    });
+
+    it('should destroy the model' function() {
+      spyOn(window, 'confirm').andReturn(true);
+      spyOn(model, 'destroy');
+
+      $('#facility').append(view.el);
+      view.$('button.delete').trigger('click');
+
+      expect(model.destroy).toHaveBeenCalled();
+      expect(window.confirm).toHaveBeenCalled();
+    });
+
+    it('should remove the view when the model is destroyed', function() {
+      $('#container').append(view.render().el);
+
+      expect($('button.save')).toExist();
+      model.trigger('remove');
+      expect($('button.save')).not.toExist();
     });
   });
 });

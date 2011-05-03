@@ -14,6 +14,9 @@ describe('<%= plural_object_name %>View', function() {
   });
 
   it('should add a new model when new is clicked', function() {
+    view.$('button.new').trigger('click');
 
+    expect(view.$('.list')).toContain('.<%= underscore_name %>');
+    expect(collection.length).toEqual(1);
   });
 });
