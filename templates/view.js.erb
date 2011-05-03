@@ -1,15 +1,17 @@
 var <%= object_name %>View = Backbone.View.extend({
   events: {
     'click button.save': 'save',
-    'click button.destroy': 'destroy'
+    'click button.delete': 'destroy'
   },
   attributeFields: [],
   template: JST['<%= underscore_name %>s/view'],
   className: '<%= underscore_name %>',
   initialize: function() {
-    _.bindAll(this, 'render', 'save', 'destroy');
+    _.bindAll(this, 'render', 'save', 'destroy', 'remove');
 
     this.model.bind('change', this.render);
+    this.model.bind('remove', this.remove);
+    this.model.view = this;
   },
   render: function() {
     $(this.el).html(this.template(this.model.toJSON()));
@@ -17,7 +19,7 @@ var <%= object_name %>View = Backbone.View.extend({
     return this;
   },
   save: function() {
-    this.model.save(this.attributes());
+    this.model.save(this.attributes(), { success: function(model) { model.view.render(); } });
   },
   destroy: function() {
     if (confirm("Are you sure?")) {

@@ -18,10 +18,11 @@ describe('<%= object_name %>View', function() {
     beforeEach(function() {
       model = new <%= object_name %>({id: 1});
       setFixtures('<div id="container" />');
+
+      view = new <%= object_name %>View({model: model});
     });
 
     it('should render with an update button', function() {
-      view = new <%= object_name %>View({model: model});
       view.render();
 
       expect(view.$('button.save')).toHaveText('Update');
@@ -31,7 +32,7 @@ describe('<%= object_name %>View', function() {
       spyOn(window, 'confirm').andReturn(true);
       spyOn(model, 'destroy');
 
-      $('#facility').append(view.el);
+      $('#container').append(view.el);
       view.$('button.delete').trigger('click');
 
       expect(model.destroy).toHaveBeenCalled();
