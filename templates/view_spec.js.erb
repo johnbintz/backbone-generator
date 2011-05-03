@@ -27,7 +27,7 @@ describe('<%= object_name %>View', function() {
       expect(view.$('button.save')).toHaveText('Update');
     });
 
-    it('should destroy the model' function() {
+    it('should destroy the model', function() {
       spyOn(window, 'confirm').andReturn(true);
       spyOn(model, 'destroy');
 
