@@ -6,9 +6,14 @@ describe('<%= plural_object_name %>View', function() {
   });
 
   it('should render', function() {
-    view = new <%= plural_object_name %>View(collection);
+    view = new <%= plural_object_name %>View({collection: collection});
     view.render();
 
     expect($(view.el)).toContain('.list');
+    expect($(view.el)).toContain('button.new');
+  });
+
+  it('should add a new model when new is clicked', function() {
+
   });
 });

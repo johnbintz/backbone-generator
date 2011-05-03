@@ -2,7 +2,7 @@
 
 _.extend(Backbone.Collection.prototype, {
   ensureFetched: function(callback) {
-    if (this.length == 0 || this._alreadyEnsureFetched) {
+    if (this._alreadyEnsureFetched) {
       var _this = this;
       var _refresher = function() {
         _this.unbind('refresh', _refresher);
@@ -17,3 +17,13 @@ _.extend(Backbone.Collection.prototype, {
   }
 });
 
+_.extend(Backbone.View.prototype, {
+  attributes: function() {
+    var attrs = {};
+    var _this = this;
+    _.each(this.attributeFields, function(field) {
+      attrs[field] = _this.$('input[name="' + field + '"]').val();
+    });
+    return attrs;
+  }
+});

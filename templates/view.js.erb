@@ -1,12 +1,21 @@
 var <%= object_name %>View = Backbone.View.extend({
+  events: {
+    'click button.save': 'save'
+  },
+  attributeFields: [],
   template: JST['<%= underscore_name %>s/view'],
   initialize: function() {
-    _.bindAll(this, 'render');
+    _.bindAll(this, 'render', 'save');
+
+    this.model.bind('change', this.render);
   },
   render: function() {
     $(this.el).html(this.template(this.model.toJSON()));
-    this.$('button').text(this.model.isNew() ? 'Create' : 'Update');
+    this.$('button.save').text(this.model.isNew() ? 'Create' : 'Update');
     return this;
+  },
+  save: function() {
+    this.model.save(this.attributes());
   }
 });
 

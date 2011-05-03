@@ -10,7 +10,7 @@ describe('<%= object_name %>View', function() {
       view = new <%= object_name %>View({model: model});
       view.render();
 
-      expect(view.$('button')).toHaveText('Create');
+      expect(view.$('button.save')).toHaveText('Create');
     });
   });
 
@@ -23,7 +23,7 @@ describe('<%= object_name %>View', function() {
       view = new <%= object_name %>View({model: model});
       view.render();
 
-      expect(view.$('button')).toHaveText('Update');
+      expect(view.$('button.save')).toHaveText('Update');
     });
   });
 });
