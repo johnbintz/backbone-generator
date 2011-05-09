@@ -3,17 +3,16 @@ describe '<%= plural_object_name %>View', ->
 
   beforeEach ->
     collection = new <%= plural_object_name %>()
+    view = new <%= plural_object_name %>View({collection: collection})
+    view.render()
 
   it 'should render', ->
-    view = new <%= plural_object_name %>View({collection: collectioon})
-    view.render
-
     expect($(view.el)).toContain('.list')
-    expect($(view.el)).toContail('button.new')
+    expect($(view.el)).toContain('button.new')
 
   it 'should add a new model when new is clicked', ->
     view.$('button.new').trigger('click')
 
-    expect(view.$('.list').toContain('.<%= underscore_name %>')
+    expect(view.$('.list')).toContain('.<%= css_class_name %>')
     expect(collection.length).toEqual(1)
 

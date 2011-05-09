@@ -5,17 +5,17 @@ class window.<%= object_name %>View extends Backbone.View
   }
   attributeFields: []
   template: JST['<%= underscore_name %>s/view']
-  className: '<%= underscore_name %>'
+  className: '<%= css_class_name %>'
   initialize: ->
     @model.bind('change', @render)
     @model.bind('remove', @remove)
     @model.view = this
   render: =>
-    $(@el).html(@template(@model.toJSON))
-    this.$('button.save').text(@model.isNew() ? 'Create' : 'Update')
+    $(@el).html(@template(@model.toJSON()))
+    this.$('button.save').text(if @model.isNew() then 'Create' else 'Update')
     this
   save: =>
-    @model.save(@attributes)
+    @model.save(@attributes())
   destroy: =>
     if confirm("Are you sure?")
       @model.destroy

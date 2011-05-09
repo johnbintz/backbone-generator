@@ -33,6 +33,10 @@ class BackboneGenerator < Thor
       singularize(Thor::Util.snake_case(@name.gsub("::", "/")))
     end
 
+    def css_class_name
+      underscore_name.gsub(%r{[^a-z0-9_]}, '-')
+    end
+
     def plural_underscore_name
       pluralize(underscore_name)
     end

@@ -7,7 +7,7 @@ describe '<%= object_name %>View', ->
 
     it 'should render with a create button', ->
       view = new <%= object_name %>View({model: model})
-      view.render
+      view.render()
 
       expect(view.$('button.save')).toHaveText('Create')
 
@@ -19,13 +19,13 @@ describe '<%= object_name %>View', ->
       view = new <%= object_name %>View({model: model})
 
     it 'should render with an update button', ->
-      view.render
+      view.render()
 
       expect(view.$('button.save')).toHaveText('Update')
 
     it 'should destroy the model', ->
       spyOn(window, 'confirm').andReturn(true)
-      spyOn(model, 'destory')
+      spyOn(model, 'destroy')
 
       $('#container').append(view.el)
       view.$('button.delete').trigger('click')
