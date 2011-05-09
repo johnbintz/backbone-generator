@@ -7,11 +7,28 @@ require 'thor/group'
 class BackboneGenerator < Thor
   include Thor::Actions
 
+  class_option :coffee, :type => :boolean, :desc => 'Generate CoffeeScript instead of JavaScript'
   def self.source_root
     File.expand_path('../../templates', __FILE__)
   end
 
   no_tasks do
+    def extension
+      options[:coffee] ? 'coffee' : 'js'
+    end
+
+    def script_target
+      options[:coffee] ? 'app/coffeescripts' : 'public/javascripts'
+    end
+
+    def view_target
+      'app/views'
+    end
+
+    def test_target
+      'spec/javascripts'
+    end
+
     def underscore_name
       singularize(Thor::Util.snake_case(@name.gsub("::", "/")))
     end
@@ -29,25 +46,25 @@ class BackboneGenerator < Thor
     end
 
     def generate_model
-      template('model.js.erb', "public/javascripts/models/#{underscore_name}.js")
-      template('model_spec.js.erb', "spec/javascripts/models/#{underscore_name}_spec.js")
+      template("model.#{extension}.erb", File.join(script_target, "models", "#{underscore_name}.#{extension}"))
+      template("model_spec.#{extension}.erb", File.join(test_target, "models", "#{underscore_name}_spec.#{extension}"))
     end
 
     def generate_view
-      template('view.js.erb', "public/javascripts/views/#{underscore_name}_view.js")
-      template('view.jst.erb', "app/views/#{underscore_name}s/view.jst")
-      template('view_spec.js.erb', "spec/javascripts/views/#{underscore_name}_view_spec.js")
+      template("view.#{extension}.erb", File.join(script_target, "views", "#{underscore_name}_view.#{extension}"))
+      template("view.jst.erb", File.join(view_target, "#{underscore_name}s/view.jst"))
+      template("view_spec.#{extension}.erb", File.join(test_target, "views", "#{underscore_name}_view_spec.#{extension}"))
     end
 
     def generate_collection
-      template('collection.js.erb', "public/javascripts/collections/#{plural_underscore_name}.js")
-      template('collection_spec.js.erb', "spec/javascripts/collections/#{plural_underscore_name}_spec.js")
+      template("collection.#{extension}.erb", File.join(script_target, "collections", "#{plural_underscore_name}.#{extension}"))
+      template("collection_spec.#{extension}.erb", File.join(test_target, "collections", "#{plural_underscore_name}_spec.#{extension}"))
     end
 
     def generate_collection_view
-      template('collection_view.js.erb', "public/javascripts/views/#{plural_underscore_name}_view.js")
-      template('collection_view.jst.erb', "app/views/#{plural_underscore_name}/list.jst")
-      template('collection_view_spec.js.erb', "spec/javascripts/views/#{plural_underscore_name}_view_spec.js")
+      template("collection_view.#{extension}.erb", File.join(script_target, 'views', "#{plural_underscore_name}_view.#{extension}"))
+      template("collection_view.jst.erb", File.join(view_target, "#{plural_underscore_name}/list.jst"))
+      template("collection_view_spec.#{extension}.erb", File.join(test_target, "views", "#{plural_underscore_name}_view_spec.#{extension}"))
     end
   end
 
@@ -83,20 +100,20 @@ class BackboneGenerator < Thor
 
   desc 'spec-helper', "Generate a spec helper for Backbone things"
   def spec_helper
-    template('spec_helper.js.erb', 'spec/javascripts/helpers/backbone_spec_helper.js')
+    template("spec_helper.#{extension}.erb", File.join(test_target, "helpers", "backbone_spec_helper.#{extension}"))
   end
 
-  desc 'app-helper', "Generate an application helper for useful Backbone things"
+  desc "app-helper", "Generate an application helper for useful Backbone things"
   def app_helper
-    template('app_helper.js.erb', 'public/javascripts/applications/backbone_helper.js')
+    template("app_helper.#{extension}.erb", File.join(script_target, "applications", "backbone_helper.#{extension}"))
   end
 
-  desc 'app-scaffold', "Generate an application scaffold"
+  desc "app-scaffold", "Generate an application scaffold"
   def app_scaffold
-    template('app_view.js.erb', 'public/javascripts/application/app_view.js')
-    template('app_view.jst.erb', 'app/views/application/app_view.jst')
-    template('controller.js.erb', 'public/javascripts/application/controller.js')
-    template('app_view_spec.js.erb', 'spec/javascripts/application/app_view_spec.js')
+    template("app_view.#{extension}.erb", File.join(script_target, "application", "app_view.#{extension}"))
+    template("app_view.jst.erb", File.join(view_target, "application", "app_view.jst"))
+    template("controller.#{extension}.erb", File.join(script_target, "application", "controller.#{extension}"))
+    template("app_view_spec.#{extension}.erb", File.join(test_target, "application", "app_view_spec.#{extension}"))
   end
 
   private

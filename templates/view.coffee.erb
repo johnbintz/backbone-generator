@@ -1,0 +1,22 @@
+class window.<%= object_name %>View extends Backbone.View
+  events: {
+    'click button.save': 'save',
+    'click button.delete': 'destroy'
+  }
+  attributeFields: []
+  template: JST['<%= underscore_name %>s/view']
+  className: '<%= underscore_name %>'
+  initialize: ->
+    @model.bind('change', @render)
+    @model.bind('remove', @remove)
+    @model.view = this
+  render: =>
+    $(@el).html(@template(@model.toJSON))
+    this.$('button.save').text(@model.isNew() ? 'Create' : 'Update')
+    this
+  save: =>
+    @model.save(@attributes)
+  destroy: =>
+    if confirm("Are you sure?")
+      @model.destroy
+

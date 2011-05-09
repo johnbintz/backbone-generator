@@ -1,0 +1,14 @@
+window.withServer ->
+  jasmine.getEnv().withServer()
+
+jasmine.Env.prototype.withServer ->
+  @currentSuite.beforeEach ->
+    @server = sinon.fakeServer.create()
+
+  @currentSuite.afterEach ->
+    @server.restore()
+
+beforeEach ->
+  @validJSONResponse = (data) ->
+    [ 200, { 'Content-type': 'application/json' }, JSON.stringify(data) ]
+

@@ -1,0 +1,42 @@
+describe '<%= object_name %>View', ->
+  view = model = null
+
+  describe 'new record', ->
+    beforeEach ->
+      model = new <%= object_name %>
+
+    it 'should render with a create button', ->
+      view = new <%= object_name %>View({model: model})
+      view.render
+
+      expect(view.$('button.save')).toHaveText('Create')
+
+  describe 'existing record', ->
+    beforeEach ->
+      model = new <%= object_name %>({id: 1})
+      setFixtures('<div id="container" />')
+
+      view = new <%= object_name %>View({model: model})
+
+    it 'should render with an update button', ->
+      view.render
+
+      expect(view.$('button.save')).toHaveText('Update')
+
+    it 'should destroy the model', ->
+      spyOn(window, 'confirm').andReturn(true)
+      spyOn(model, 'destory')
+
+      $('#container').append(view.el)
+      view.$('button.delete').trigger('click')
+
+      expect(model.destroy).toHaveBeenCalled
+      expect(window.confirm).toHaveBeenCalled
+
+    it 'should remove the view when the model is destroyed', ->
+      $('#container').append(view.render().el)
+
+      expect($('button.save')).toExist
+      model.trigger('remove')
+      expect($('button.save')).not.toExist
+

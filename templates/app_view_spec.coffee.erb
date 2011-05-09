@@ -1,0 +1,9 @@
+describe 'AppView', ->
+  appView = null
+
+  beforeEach, ->
+    appView = new AppView()
+
+  it 'should render', ->
+    expect($(appView.render().el)).toContain('.something')
+

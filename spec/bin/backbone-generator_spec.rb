@@ -16,8 +16,116 @@ describe 'backbone-generator' do
   after { clean! }
 
   describe 'coffeescript' do
-    describe 'model' do
+    def should_generate_model
+      File.file?(model = 'app/coffeescripts/models/section/model.coffee').should be_true
+      File.file?(spec = 'spec/javascripts/models/section/model_spec.coffee').should be_true
 
+      File.read(model).should match(/SectionModel/)
+      File.read(spec).should match(/SectionModel/)
+    end
+
+    def should_generate_view
+      File.file?(view = 'app/coffeescripts/views/section/model_view.coffee').should be_true
+      File.file?(spec = 'spec/javascripts/views/section/model_view_spec.coffee').should be_true
+      File.file?(template = 'app/views/section/models/view.jst').should be_true
+
+      File.read(view).should match(/SectionModel/)
+      File.read(view).should match(%r{template: JST\['section/models/view'\]})
+      File.read(spec).should match(/SectionModel/)
+    end
+
+    def should_generate_collection
+      File.file?(collection = 'app/coffeescripts/collections/section/models.coffee').should be_true
+      File.file?(spec = 'spec/javascripts/collections/section/models_spec.coffee').should be_true
+
+      File.read(collection).should match(/SectionModels/)
+      File.read(collection).should_not match(/SectionModelss/)
+      File.read(collection).should match(%r{section/model})
+      File.read(spec).should match(/SectionModels/)
+      File.read(spec).should_not match(/SectionModelss/)
+    end
+
+    def should_generate_collection_view
+      File.file?(view = 'app/coffeescripts/views/section/models_view.coffee').should be_true
+      File.file?(spec = 'spec/javascripts/views/section/models_view_spec.coffee').should be_true
+      File.file?(template = 'app/views/section/models/list.jst').should be_true
+
+      File.read(view).should match(/SectionModelsView/)
+      File.read(view).should_not match(/SectionModelssView/)
+      File.read(view).should match(/SectionModelView/)
+      File.read(view).should match(%r{template: JST\['section/models/list'\]})
+      File.read(spec).should match(/SectionModelsView/)
+      File.read(spec).should_not match(/SectionModelssView/)
+    end
+
+    describe 'model' do
+      it "should generate the model files" do
+        run "model", "Section::Model", '--coffee'
+
+        should_generate_model
+      end
+    end
+
+    describe 'view' do
+      it "should generate the model files" do
+        run "view", "Section::Model", '--coffee'
+
+        should_generate_view
+      end
+    end
+
+    describe 'collection view' do
+      it "should generate the collection view files" do
+        run "collection-view", "Section::Model", '--coffee'
+
+        should_generate_collection_view
+      end
+    end
+
+    describe 'collection' do
+      it "should generate the collection files" do
+        run "collection", "Section::Model", '--coffee'
+
+        should_generate_collection
+      end
+    end
+
+    describe 'scaffold' do
+      it "should generate everything!" do
+        run "scaffold", "Section::Model", '--coffee'
+
+        should_generate_model
+        should_generate_view
+        should_generate_collection
+        should_generate_collection_view
+      end
+    end
+
+    describe 'spec helper' do
+      it "should generate a spec helper" do
+        run "spec-helper", '--coffee'
+
+        File.file?(collection = 'spec/javascripts/helpers/backbone_spec_helper.coffee').should be_true
+      end
+    end
+
+    describe 'app helper' do
+      it "should generate an app helper" do
+        run "app-helper", '--coffee'
+
+        File.file?(collection = 'app/coffeescripts/applications/backbone_helper.coffee').should be_true
+      end
+    end
+
+    describe 'application scaffold' do
+      it "should generate an application scaffold" do
+        run "app-scaffold", '--coffee'
+
+        File.file?(app = 'app/coffeescripts/application/app_view.coffee').should be_true
+        File.file?(app_view = 'app/views/application/app_view.jst').should be_true
+        File.file?(controller = 'app/coffeescripts/application/controller.coffee').should be_true
+        File.file?(spec = 'spec/javascripts/application/app_view_spec.coffee').should be_true
+      end
     end
   end
 

@@ -1,0 +1,23 @@
+class window.<%= plural_object_name %>View extends Backbone.View
+  events: {
+    'click button.new': 'addNew'
+  }
+  template: JST['<%= plural_underscore_name %>/list']
+  initialize: ->
+    @collection.bind('refresh', @addAll)
+
+    @render
+    @collection.fetch
+  render: =>
+    $(this.el).html(@template())
+    this
+  addOne: (model) =>
+    view = new <%= object_name %>View({model: model})
+    this.$('.list').append(view.render().el)
+  addAll: =>
+    @collection.each(@addOne)
+  addNew: =>
+    facility = new <%= object_name %>()
+    @collection.add(facility)
+    @addOne(facility)
+

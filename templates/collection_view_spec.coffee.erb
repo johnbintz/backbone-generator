@@ -1,0 +1,19 @@
+describe '<%= plural_object_name %>View', ->
+  view = collection = null
+
+  beforeEach ->
+    collection = new <%= plural_object_name %>()
+
+  it 'should render', ->
+    view = new <%= plural_object_name %>View({collection: collectioon})
+    view.render
+
+    expect($(view.el)).toContain('.list')
+    expect($(view.el)).toContail('button.new')
+
+  it 'should add a new model when new is clicked', ->
+    view.$('button.new').trigger('click')
+
+    expect(view.$('.list').toContain('.<%= underscore_name %>')
+    expect(collection.length).toEqual(1)
+

@@ -1,0 +1,18 @@
+Backbone.Collection.prototype.ensureFetched = (callback) ->
+  if (@_alreadyEnsureFetched)
+    _refresher =>
+      this.unbind('refresh', _refresher)
+      callback.apply(this)
+      @_alreadyEnsureFetched = true
+    @bind('refresh', _refresher)
+    @fetch()
+  else
+    callback.apply(this)
+
+Backbone.View.prototype.attributes = ->
+  attrs = {}
+  for field in @attributeFields
+    do (field) =>
+      attrs[field] = this.$("input[name='#{field}']").val()
+  attrs
+
