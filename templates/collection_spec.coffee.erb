@@ -4,4 +4,11 @@ describe '<%= plural_object_name %>', ->
   withServer()
 
   it 'should fetch records from the API', ->
+    collection = new <%= plural_object_name %>()
+
+    @server.respondWith('GET', '/<%= plural_underscore_name %>', @validJSONResponse([{id: 1}]))
+    collection.fetch()
+    @server.respond()
+
+    expect(collection.length).toEqual(1)
 

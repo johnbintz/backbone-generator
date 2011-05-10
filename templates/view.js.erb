@@ -16,6 +16,7 @@ var <%= object_name %>View = Backbone.View.extend({
   render: function() {
     $(this.el).html(this.template(this.model.toJSON()));
     this.$('button.save').text(this.model.isNew() ? 'Create' : 'Update');
+    this.$('button.delete')[this.model.isNew() ? 'hide' : 'show']();
     return this;
   },
   save: function() {

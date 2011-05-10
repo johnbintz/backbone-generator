@@ -13,6 +13,7 @@ class window.<%= object_name %>View extends Backbone.View
   render: =>
     $(@el).html(@template(@model.toJSON()))
     this.$('button.save').text(if @model.isNew() then 'Create' else 'Update')
+    this.$('button.delete')[if @model.isNew() then 'hide' else 'show']();
     this
   save: =>
     @model.save(@attributes())
