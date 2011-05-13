@@ -17,10 +17,9 @@ describe '<%= object_name %>View', ->
       setFixtures('<div id="container" />')
 
       view = new <%= object_name %>View({model: model})
-
-    it 'should render with an update button', ->
       view.render()
 
+    it 'should render with an update button', ->
       expect(view.$('button.save')).toHaveText('Update')
 
     it 'should destroy the model', ->

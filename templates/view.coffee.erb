@@ -21,5 +21,5 @@ class window.<%= object_name %>View extends Backbone.View
     @model.save(this.attributes())
   destroy: =>
     if confirm("Are you sure?")
-      @model.destroy
+      @model.destroy()
 
