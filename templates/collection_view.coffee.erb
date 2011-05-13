@@ -7,12 +7,13 @@ class window.<%= plural_object_name %>View extends Backbone.View
     @collection.bind('refresh', this.addAll)
   render: =>
     $(this.el).html(this.template())
+    this.addAll()
     this
   addOne: (model) =>
     view = new <%= object_name %>View({model: model})
     this.$('.list').append(view.render().el)
   addAll: =>
-    @collection.each(this.addOne())
+    @collection.each(this.addOne)
   addNew: =>
     facility = new <%= object_name %>()
     @collection.add(facility)

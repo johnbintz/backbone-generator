@@ -16,3 +16,11 @@ describe '<%= plural_object_name %>View', ->
     expect(view.$('.list')).toContain('.<%= css_class_name %>')
     expect(collection.length).toEqual(1)
 
+  it 'should render the models when re-rendered', ->
+    expect(view.$('.list')).not.toContain('.<%= css_class_name %>')
+
+    model = new <%= object_name %>({id: 1})
+    collection.add(model)
+    view.render()
+
+    expect(view.$('.list')).toContain('.<%= css_class_name %>')
