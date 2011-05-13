@@ -4,8 +4,8 @@ Backbone.Collection.prototype.ensureFetched = (callback) ->
       this.unbind('refresh', _refresher)
       callback.apply(this)
       @_alreadyEnsureFetched = true
-    @bind('refresh', _refresher)
-    @fetch()
+    this.bind('refresh', _refresher)
+    this.fetch()
   else
     callback.apply(this)
 

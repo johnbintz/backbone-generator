@@ -4,10 +4,7 @@ class window.<%= plural_object_name %>View extends Backbone.View
   }
   template: JST['<%= plural_underscore_name %>/list']
   initialize: ->
-    @collection.bind('refresh', @addAll)
-
-    this.render()
-    @collection.fetch
+    @collection.bind('refresh', this.addAll)
   render: =>
     $(this.el).html(this.template())
     this
