@@ -7,16 +7,18 @@ class window.<%= object_name %>View extends Backbone.View
   template: JST['<%= underscore_name %>s/view']
   className: '<%= css_class_name %>'
   initialize: ->
-    @model.bind('change', @render)
-    @model.bind('remove', @remove)
+    _.bindAll(this, 'remove')
+
+    @model.bind('change', this.render)
+    @model.bind('remove', this.remove)
     @model.view = this
   render: =>
-    $(@el).html(@template(@model.toJSON()))
+    $(@el).html(this.template(@model.toJSON()))
     this.$('button.save').text(if @model.isNew() then 'Create' else 'Update')
     this.$('button.delete')[if @model.isNew() then 'hide' else 'show']();
     this
   save: =>
-    @model.save(@attributes())
+    @model.save(this.attributes())
   destroy: =>
     if confirm("Are you sure?")
       @model.destroy

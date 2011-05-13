@@ -30,13 +30,13 @@ describe '<%= object_name %>View', ->
       $('#container').append(view.el)
       view.$('button.delete').trigger('click')
 
-      expect(model.destroy).toHaveBeenCalled
-      expect(window.confirm).toHaveBeenCalled
+      expect(model.destroy).toHaveBeenCalled()
+      expect(window.confirm).toHaveBeenCalled()
 
     it 'should remove the view when the model is destroyed', ->
       $('#container').append(view.render().el)
 
-      expect($('button.save')).toExist
+      expect($('button.save')).toExist()
       model.trigger('remove')
-      expect($('button.save')).not.toExist
+      expect($('button.save')).not.toExist()
 
