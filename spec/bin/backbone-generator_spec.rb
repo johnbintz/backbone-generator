@@ -17,7 +17,7 @@ describe 'backbone-generator' do
 
   describe 'coffeescript' do
     def should_generate_model
-      File.file?(model = 'app/coffeescripts/models/section/model.coffee').should be_true
+      File.file?(model = 'app/assets/javascripts/models/section/model.coffee').should be_true
       File.file?(spec = 'spec/javascripts/models/section/model_spec.coffee').should be_true
 
       File.read(model).should match(/SectionModel/)
@@ -25,7 +25,7 @@ describe 'backbone-generator' do
     end
 
     def should_generate_view
-      File.file?(view = 'app/coffeescripts/views/section/model_view.coffee').should be_true
+      File.file?(view = 'app/assets/javascripts/views/section/model_view.coffee').should be_true
       File.file?(spec = 'spec/javascripts/views/section/model_view_spec.coffee').should be_true
       File.file?(template = 'app/views/section/models/view.jst').should be_true
 
@@ -35,7 +35,7 @@ describe 'backbone-generator' do
     end
 
     def should_generate_collection
-      File.file?(collection = 'app/coffeescripts/collections/section/models.coffee').should be_true
+      File.file?(collection = 'app/assets/javascripts/collections/section/models.coffee').should be_true
       File.file?(spec = 'spec/javascripts/collections/section/models_spec.coffee').should be_true
 
       File.read(collection).should match(/SectionModels/)
@@ -46,7 +46,7 @@ describe 'backbone-generator' do
     end
 
     def should_generate_collection_view
-      File.file?(view = 'app/coffeescripts/views/section/models_view.coffee').should be_true
+      File.file?(view = 'app/assets/javascripts/views/section/models_view.coffee').should be_true
       File.file?(spec = 'spec/javascripts/views/section/models_view_spec.coffee').should be_true
       File.file?(template = 'app/views/section/models/list.jst').should be_true
 
@@ -113,7 +113,7 @@ describe 'backbone-generator' do
       it "should generate an app helper" do
         run "app-helper", '--coffee'
 
-        File.file?(collection = 'app/coffeescripts/applications/backbone_helper.coffee').should be_true
+        File.file?(collection = 'app/assets/javascripts/applications/backbone_helper.coffee').should be_true
       end
     end
 
@@ -121,9 +121,9 @@ describe 'backbone-generator' do
       it "should generate an application scaffold" do
         run "app-scaffold", '--coffee'
 
-        File.file?(app = 'app/coffeescripts/application/app_view.coffee').should be_true
+        File.file?(app = 'app/assets/javascripts/application/app_view.coffee').should be_true
         File.file?(app_view = 'app/views/application/app_view.jst').should be_true
-        File.file?(controller = 'app/coffeescripts/application/controller.coffee').should be_true
+        File.file?(controller = 'app/assets/javascripts/application/controller.coffee').should be_true
         File.file?(spec = 'spec/javascripts/application/app_view_spec.coffee').should be_true
       end
     end

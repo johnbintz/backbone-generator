@@ -18,7 +18,7 @@ class BackboneGenerator < Thor
     end
 
     def script_target
-      options[:coffee] ? 'app/coffeescripts' : 'public/javascripts'
+      options[:coffee] ? 'app/assets/javascripts' : 'public/javascripts'
     end
 
     def view_target
