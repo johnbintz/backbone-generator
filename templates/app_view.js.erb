@@ -1,8 +1,5 @@
 var AppView = Backbone.View.extend({
   el: '#application',
-  routes: {
-    'index': 'index'
-  },
   template: JST['application/app_view'],
   initialize: function() {
     _.bindAll(this, 'render');

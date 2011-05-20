@@ -1,8 +1,5 @@
 class window.AppView extends Backbone.View
   el: '#application'
-  routes: {
-    'index': 'index'
-  }
   template: JST['application/app_view']
   initialize: ->
     controller = new Controller({app: this})
