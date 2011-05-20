@@ -1,5 +1,6 @@
 Backbone.Collection.prototype.ensureFetched = (callback) ->
-  if (@_alreadyEnsureFetched)
+  if !@_alreadyEnsureFetched
+    _refresher = null
     _refresher =>
       this.unbind('refresh', _refresher)
       callback.apply(this)
