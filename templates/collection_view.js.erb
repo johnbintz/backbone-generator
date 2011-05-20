@@ -23,9 +23,9 @@ var <%= plural_object_name %>View = Backbone.View.extend({
     this.collection.each(this.addOne);
   },
   addNew: function() {
-    var facility = new <%= object_name %>();
-    this.collection.add(facility);
+    var object = new <%= object_name %>();
+    this.collection.add(object);
 
-    this.addOne(facility);
+    this.addOne(object);
   }
 });

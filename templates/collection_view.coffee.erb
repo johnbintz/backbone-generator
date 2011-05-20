@@ -15,7 +15,7 @@ class window.<%= plural_object_name %>View extends Backbone.View
   addAll: =>
     @collection.each(this.addOne)
   addNew: =>
-    facility = new <%= object_name %>()
-    @collection.add(facility)
-    this.addOne(facility)
+    object = new <%= object_name %>()
+    @collection.add(object)
+    this.addOne(object)
 
