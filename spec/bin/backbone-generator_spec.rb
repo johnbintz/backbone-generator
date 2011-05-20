@@ -113,7 +113,7 @@ describe 'backbone-generator' do
       it "should generate an app helper" do
         run "app-helper", '--coffee'
 
-        File.file?(collection = 'app/assets/javascripts/applications/backbone_helper.coffee').should be_true
+        File.file?(collection = 'app/assets/javascripts/application/backbone_helper.coffee').should be_true
       end
     end
 
@@ -249,7 +249,7 @@ describe 'backbone-generator' do
       it "should generate an app helper" do
         run "app-helper"
 
-        File.file?(collection = 'public/javascripts/applications/backbone_helper.js').should be_true
+        File.file?(collection = 'public/javascripts/application/backbone_helper.js').should be_true
       end
     end
 

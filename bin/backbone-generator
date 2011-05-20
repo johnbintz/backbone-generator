@@ -109,7 +109,7 @@ class BackboneGenerator < Thor
 
   desc "app-helper", "Generate an application helper for useful Backbone things"
   def app_helper
-    template("app_helper.#{extension}.erb", File.join(script_target, "applications", "backbone_helper.#{extension}"))
+    template("app_helper.#{extension}.erb", File.join(script_target, "application", "backbone_helper.#{extension}"))
   end
 
   desc "app-scaffold", "Generate an application scaffold"

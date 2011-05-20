@@ -1,5 +1,6 @@
 class window.AppView extends Backbone.View
   el: '#application'
+  routes: {}
   template: JST['application/app_view']
   initialize: ->
     controller = new Controller({app: this})
